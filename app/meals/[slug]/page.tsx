@@ -1,5 +1,6 @@
-import Link from "next/link";
+import { getMeal } from "@/lib/meals";
 import style from "./style.module.scss";
+import Image from "next/image";
 
 type SlugParams = {
   readonly params: {
@@ -8,12 +9,29 @@ type SlugParams = {
 };
 
 export default function Slug({ params }: SlugParams) {
+  const meal = getMeal(params.slug);
+  meal.instructions = meal.instructions.replace(/\n/g, "<br />");
+
   return (
-    <main>
-      <h1>{params.slug}</h1>
-      <Link href="/" className={style.asd}>
-        Home page
-      </Link>
-    </main>
+    <>
+      <header className={style.header}>
+        <div className={style.image}>
+          <Image src={meal.image} alt={meal.title} fill />
+        </div>
+        <div className={style.headerText}>
+          <h1>{meal.title}</h1>
+          <p className={style.creator}>
+            by <a href={`mailto:${meal.creator__email}`}>{meal.creator}</a>
+          </p>
+          <p className={style.summary}>{meal.summary}</p>
+        </div>
+      </header>
+      <main>
+        <p
+          className={style.instructions}
+          dangerouslySetInnerHTML={{ __html: meal.instructions }}
+        ></p>
+      </main>
+    </>
   );
 }

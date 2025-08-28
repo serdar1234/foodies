@@ -4,10 +4,12 @@ import Image from "next/image";
 import classes from "./meal-item.module.scss";
 
 export type MealProps = {
+  creator__email: string;
   title: string;
   slug: string;
   image: string;
   summary: string;
+  instructions: string;
   creator: string;
 };
 

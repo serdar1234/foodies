@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
-import "./globals.css";
+import "./globals.scss";
 import MainHeader from "@/components/main-header/main-header";
-import MainHeaderBackground from "@/components/main-header/main-header-background";
 
 export const metadata: Metadata = {
   title: "NextLevel Food",
