@@ -30,7 +30,7 @@
   margin: 0;
   font-size: 3.5rem;
   text-transform: uppercase;
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
   text-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.5);
 }
 
@@ -45,6 +45,7 @@
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  text-decoration: none;
 }
 
 .creator a:hover,

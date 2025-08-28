@@ -10,7 +10,7 @@ type SlugParams = {
 
 export default async function Slug({ params }: SlugParams) {
   const meal = await getMeal(params.slug);
-  meal.instructions = meal.instructions.replace(/\n/g, "<br />");
+  meal.instructions = meal.instructions.replaceAll("\n", "<br />");
 
   return (
     <>
