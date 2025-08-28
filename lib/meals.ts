@@ -16,7 +16,9 @@ export async function getMeals(): Promise<Meal[]> {
 }
 
 export async function getMeal(slug: string): Promise<Meal> {
-  return (await db
+  await new Promise<void>((resolve) => setTimeout(resolve));
+
+  return db
     .prepare("SELECT * FROM meals WHERE slug = ?")
-    .get(slug)) as unknown as Meal;
+    .get(slug) as unknown as Meal;
 }
