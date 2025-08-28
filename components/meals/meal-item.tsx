@@ -3,7 +3,7 @@ import Image from "next/image";
 
 import classes from "./meal-item.module.scss";
 
-export type MealProps = {
+export type Meal = {
   creator__email: string;
   title: string;
   slug: string;
@@ -19,7 +19,7 @@ export default function MealItem({
   image,
   summary,
   creator,
-}: MealProps) {
+}: Meal) {
   return (
     <article className={classes.meal}>
       <header>

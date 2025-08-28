@@ -8,8 +8,8 @@ type SlugParams = {
   };
 };
 
-export default function Slug({ params }: SlugParams) {
-  const meal = getMeal(params.slug);
+export default async function Slug({ params }: SlugParams) {
+  const meal = await getMeal(params.slug);
   meal.instructions = meal.instructions.replace(/\n/g, "<br />");
 
   return (
