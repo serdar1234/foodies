@@ -1,6 +1,7 @@
 import { getMeal } from "@/lib/meals";
 import style from "./style.module.scss";
 import Image from "next/image";
+import { notFound } from "next/navigation";
 
 type SlugParams = {
   readonly params: {
@@ -10,6 +11,10 @@ type SlugParams = {
 
 export default async function Slug({ params }: SlugParams) {
   const meal = await getMeal(params.slug);
+  if (!meal) {
+    notFound();
+  }
+
   meal.instructions = meal.instructions.replaceAll("\n", "<br />");
 
   return (
