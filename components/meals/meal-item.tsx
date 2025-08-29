@@ -4,10 +4,10 @@ import Image from "next/image";
 import classes from "./meal-item.module.scss";
 
 export type Meal = {
-  creator__email: string;
+  creator_email: string;
   title: string;
   slug: string;
-  image: string;
+  image: FormDataEntryValue | null;
   summary: string;
   instructions: string;
   creator: string;
@@ -24,7 +24,7 @@ export default function MealItem({
     <article className={classes.meal}>
       <header>
         <div className={classes.image}>
-          <Image src={image} alt={title} fill />
+          <Image src={image as string} alt={title} fill />
         </div>
         <div className={classes.headerText}>
           <h2>{title}</h2>

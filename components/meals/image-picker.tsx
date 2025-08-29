@@ -10,25 +10,31 @@ export default function ImagePicker({
   label?: string;
   name?: string;
 }) {
-  const [pickedImage, setPickedImage] = useState<string | ArrayBuffer | null>(
-    null
-  );
+  const [pickedImage, setPickedImage] = useState<string | null>(null);
   const inputElementRef = useRef<HTMLInputElement>(null);
   function handleClick() {
-    inputElementRef.current!.click();
+    inputElementRef.current?.click();
   }
 
   function handleImageChange(event: ChangeEvent<HTMLInputElement>): void {
-    const file = (event.target.files as FileList)[0];
-    if (!file) {
+    const files = event.target.files;
+    if (!files || files.length === 0) {
       setPickedImage(null);
       return;
     }
+
+    const file = files[0];
+    if (!file.type.startsWith("image")) {
+      return;
+    }
     const fileReader = new FileReader();
+
     fileReader.onload = () => {
-      setPickedImage(fileReader.result);
+      if (typeof fileReader.result === "string") {
+        setPickedImage(fileReader.result);
+      }
     };
-    fileReader.readAsDataURL(file);
+    fileReader.readAsDataURL(file as File);
   }
 
   return (
@@ -55,7 +61,7 @@ export default function ImagePicker({
           onChange={handleImageChange}
         />
         <button className={classes.button} type="button" onClick={handleClick}>
-          Choose image
+          Choose an image
         </button>
       </div>
     </div>
